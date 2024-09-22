@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:platzi_trip_app/widgets/profile_card_image_description.dart';
 
 // ignore: must_be_immutable
 class ProfileCardImage extends StatelessWidget {
-  String pathImage = "assets/images/beach.jpg";
+  final String pathImage;
+  final String name;
+  final String description;
+  final String category;
+  final String steps;
+  final double imageMarginTop;
 
-  ProfileCardImage(this.pathImage, {super.key});
+  const ProfileCardImage(
+      {required this.pathImage,
+      required this.name,
+      required this.description,
+      required this.category,
+      required this.steps,
+      required this.imageMarginTop,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
+    double descriptionMarginTop = 190 + imageMarginTop;
     final card = Container(
-      height: 350.0,
-      width: 250.0,
-      margin: const EdgeInsets.only(top: 80.0, left: 20.0),
+      height: 250.0,
+      width: 380.0,
+      margin: EdgeInsets.only(top: imageMarginTop, left: 15.0),
       decoration: BoxDecoration(
           image:
               DecorationImage(fit: BoxFit.cover, image: AssetImage(pathImage)),
-          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(20.0)),
           shape: BoxShape.rectangle,
           boxShadow: const <BoxShadow>[
             BoxShadow(
@@ -25,6 +39,17 @@ class ProfileCardImage extends StatelessWidget {
           ]),
     );
 
-    return card;
+    return Stack(
+      children: <Widget>[
+        card,
+        ProfileCardImageDescription(
+          name: name,
+          description: description,
+          category: category,
+          steps: steps,
+          marginTop: descriptionMarginTop,
+        )
+      ],
+    );
   }
 }

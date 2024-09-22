@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ProfileMenuBar extends StatelessWidget {
-  const ProfileMenuBar({super.key});
+  final double _top;
+
+  const ProfileMenuBar(this._top, {super.key});
 
   void onPressed() {}
 
@@ -24,7 +26,7 @@ class ProfileMenuBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 225.0),
+      margin: EdgeInsets.only(top: _top),
       padding: const EdgeInsets.only(left: 15.0, right: 15.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
