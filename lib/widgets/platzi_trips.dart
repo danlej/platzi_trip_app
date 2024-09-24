@@ -12,7 +12,6 @@ class PlatziTrips extends StatefulWidget {
 
 class _PlatziTripsState extends State<PlatziTrips> {
   int indexTap = 0;
-
   final List<Widget> widgetsChildren = [
     const HomeTrips(),
     const SearchTrips(),
