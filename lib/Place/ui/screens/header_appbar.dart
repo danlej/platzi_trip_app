@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platzi_trip_app/widgets/gradient_back.dart';
-import 'package:platzi_trip_app/widgets/card_image_list.dart';
+import 'package:platzi_trip_app/Place/ui/widgets/card_image_list.dart';
 
 class HeaderAppBar extends StatelessWidget {
   const HeaderAppBar({super.key});
@@ -8,7 +8,7 @@ class HeaderAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Stack(
-      children: <Widget>[GradientBack("Bienvenido!", 250.0), CardImageList()],
+      children: <Widget>[GradientBack("Welcome!", 250.0), CardImageList()],
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:platzi_trip_app/widgets/description_place.dart';
-import 'package:platzi_trip_app/widgets/review_list.dart';
+import 'package:platzi_trip_app/Place/ui/widgets/description_place.dart';
+import 'package:platzi_trip_app/Place/ui/widgets/review_list.dart';
 import 'package:platzi_trip_app/helpers/lorem_ipsum.dart';
-import 'package:platzi_trip_app/widgets/header_appbar.dart';
+import 'package:platzi_trip_app/Place/ui/screens/header_appbar.dart';
 
 class HomeTrips extends StatelessWidget {
   const HomeTrips({super.key});

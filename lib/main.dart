@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platzi_trip_app/widgets/platzi_trips.dart';
+import 'package:platzi_trip_app/platzi_trips.dart';
 //import 'package:platzi_trip_app/widgets/platzi_trips_cupertino.dart';
 
 void main() {

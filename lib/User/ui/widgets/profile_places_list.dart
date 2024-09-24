@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'profile_place.dart';
-import 'place.dart';
+import 'package:platzi_trip_app/Place/model/place.dart';
 
 // ignore: must_be_immutable
 class ProfilePlacesList extends StatelessWidget {

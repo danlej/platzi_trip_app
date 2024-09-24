@@ -18,7 +18,7 @@ class GradientBack extends StatelessWidget {
               end: FractionalOffset(1.0, 0.6),
               stops: [0.0, 0.6],
               tileMode: TileMode.clamp)),
-      alignment: const Alignment(-0.9, -0.7),
+      alignment: const Alignment(-0.9, -0.6),
       child: Text(
         _title,
         style: const TextStyle(

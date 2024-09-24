@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platzi_trip_app/widgets/place.dart';
+import 'package:platzi_trip_app/Place/model/place.dart';
 import 'profile_place_info.dart';
 
 // ignore: must_be_immutable

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:platzi_trip_app/widgets/profile_background.dart';
-import 'package:platzi_trip_app/widgets/profile_header.dart';
-import 'package:platzi_trip_app/widgets/profile_places_list.dart';
-//import 'package:platzi_trip_app/widgets/profile_header_appbar.dart';
+import 'package:platzi_trip_app/User/ui/widgets/profile_background.dart';
+import 'package:platzi_trip_app/User/ui/screens/profile_header.dart';
+import 'package:platzi_trip_app/User/ui/widgets/profile_places_list.dart';
 
 class ProfileTrips extends StatelessWidget {
   const ProfileTrips({super.key});
@@ -20,6 +19,7 @@ class ProfileTrips extends StatelessWidget {
           // Este margen es para NO tapar la sección de 'Profile' con el ListView.
           margin: const EdgeInsets.only(top: 300.0),
           child: ListView(
+            padding: const EdgeInsets.only(top: 10.0),
             children: <Widget>[ProfilePlacesList()],
           ),
         ),

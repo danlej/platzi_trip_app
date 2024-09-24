@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platzi_trip_app/widgets/review.dart';
+import 'package:platzi_trip_app/Place/ui/widgets/review.dart';
 
 class ReviewList extends StatelessWidget {
   final List<String> pathImages = [
