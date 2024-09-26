@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platzi_trip_app/User/ui/widgets/logout_button.dart';
 import 'package:platzi_trip_app/User/ui/widgets/user_info.dart';
 import 'package:platzi_trip_app/User/ui/widgets/button_bar.dart';
 
@@ -21,7 +22,13 @@ class ProfileHeader extends StatelessWidget {
       child: Column(
         children: <Widget>[
           const Row(
-            children: <Widget>[title],
+            children: <Widget>[
+              title,
+              Spacer(
+                flex: 3,
+              ),
+              LogoutButton(),
+            ],
           ),
           UserInfo(
               'assets/images/woman02.png', 'Anahí Salgado', 'anahi@platzi.com'),

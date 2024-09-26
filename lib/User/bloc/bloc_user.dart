@@ -16,6 +16,11 @@ class UserBloc implements Bloc {
     return authRepository.signInFirebase();
   }
 
+  // 2do Caso de uso de la clase User: SignOut de la aplicación Google
+  Future<void> signOut() async {
+    authRepository.signOutFirebase();
+  }
+
   @override
   void dispose() {}
 }
