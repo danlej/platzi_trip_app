@@ -12,7 +12,20 @@
           "package_name": "com.example.platzi_trip_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "361357647948-f3mjtjhih9hon5v8oijmdo31eas28iu8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.platzi",
+            "certificate_hash": "537d4e1feefd8a74b2721360d9a1e41ec27998e6"
+          }
+        },
+        {
+          "client_id": "361357647948-c507ls553ukdtfss1rf9fi9jbs49sb55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDRwyqX5UsRA3Mk32WkIbzMF2eatxWdY18"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "361357647948-c507ls553ukdtfss1rf9fi9jbs49sb55.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "361357647948-69k5pop2mpgpdjn6md6t7utpln1mbfsr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.platziTripApp"
+              }
+            }
+          ]
         }
       }
     }
