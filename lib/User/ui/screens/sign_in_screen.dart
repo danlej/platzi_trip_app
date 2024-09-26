@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:platzi_trip_app/User/bloc/bloc_user.dart';
+import 'package:platzi_trip_app/platzi_trips_cupertino.dart';
 import 'package:platzi_trip_app/widgets/button_green.dart';
 import 'package:platzi_trip_app/widgets/gradient_back.dart';
 
@@ -18,7 +19,20 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     userBloc = BlocProvider.of(context);
-    return signInGoogleUI();
+    return _handleCurrentSession();
+  }
+
+  Widget _handleCurrentSession() {
+    return StreamBuilder(
+        stream: userBloc.authStatus,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          // snapshot - data - Object User
+          if (!snapshot.hasData || snapshot.hasError) {
+            return signInGoogleUI();
+          } else {
+            return const PlatziTripsCupertino();
+          }
+        });
   }
 
   Widget signInGoogleUI() {

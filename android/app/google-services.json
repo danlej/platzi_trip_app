@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:361357647948:android:f5c0b7f3c558849b9054e9",
+        "mobilesdk_app_id": "1:361357647948:android:9bfa6fae822386419054e9",
         "android_client_info": {
           "package_name": "com.example.platzi_trip_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "361357647948-f3mjtjhih9hon5v8oijmdo31eas28iu8.apps.googleusercontent.com",
+          "client_id": "361357647948-2u32i7n988mp80oph6et44altnrsoade.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.platzi",
+            "package_name": "com.example.platzi_trip_app",
             "certificate_hash": "537d4e1feefd8a74b2721360d9a1e41ec27998e6"
           }
         },
