@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:platzi_trip_app/User/model/user.dart';
 
 // ignore: must_be_immutable
 class UserInfo extends StatelessWidget {
-  String imgProfile;
-  String name;
-  String email;
+  User user;
 
-  UserInfo(this.imgProfile, this.name, this.email, {super.key});
+  UserInfo({required this.user, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,10 @@ class UserInfo extends StatelessWidget {
               color: Colors.white, width: 2.0, style: BorderStyle.solid),
           shape: BoxShape.circle,
           image: DecorationImage(
-              fit: BoxFit.cover, image: AssetImage(imgProfile))),
+            fit: BoxFit.cover,
+            //image: AssetImage(user.photoURL),
+            image: NetworkImage(user.photoURL),
+          )),
     );
 
     final userInfo = Column(
@@ -27,14 +29,14 @@ class UserInfo extends StatelessWidget {
       children: <Widget>[
         Container(
             margin: const EdgeInsets.only(bottom: 5.0),
-            child: Text(name,
+            child: Text(user.name,
                 style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   fontFamily: 'Lato',
                 ))),
-        Text(email,
+        Text(user.email,
             style: const TextStyle(
                 fontSize: 15.0, color: Colors.white30, fontFamily: 'Lato')),
       ],

@@ -21,11 +21,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        bloc: UserBloc(),
-        child: const MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          home: SignInScreen(), //PlatziTrips(),
-        ));
+      bloc: UserBloc(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        home: SignInScreen(), //PlatziTrips(),
+      ),
+    );
   }
 }

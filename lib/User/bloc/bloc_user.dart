@@ -5,7 +5,7 @@ import 'package:platzi_trip_app/User/repository/auth_repository.dart';
 class UserBloc implements Bloc {
   final authRepository = AuthRepository();
 
-  // FLujo de datos Streams: Firebase ya viene con métodos que nos devuelven
+  // Flujo de datos Streams: Firebase ya viene con métodos que nos devuelven
   // el flujo de datos y nosotros decidimos que hacer con ese stream.
   // Si no tuvieramos ese flujo de datos utilizariamos la clase StreamController.
   Stream<User?> streamFirebase = FirebaseAuth.instance.authStateChanges();
@@ -19,6 +19,17 @@ class UserBloc implements Bloc {
   // 2do Caso de uso de la clase User: SignOut de la aplicación Google
   Future<void> signOut() async {
     authRepository.signOutFirebase();
+  }
+
+  void checkCurrentUser() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      // ignore: avoid_print
+      print("Usuario autenticado: ${user.displayName}");
+    } else {
+      // ignore: avoid_print
+      print("No hay usuario autenticado");
+    }
   }
 
   @override

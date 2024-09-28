@@ -42,7 +42,13 @@ class FirebaseAuthAPI {
 
   Future<void> signOut() async {
     // Cierra sesión en Google y Firebase
-    await googleSignIn.signOut();
-    await _auth.signOut();
+    await googleSignIn
+        .signOut()
+        // ignore: avoid_print
+        .then((onValue) => print("Sesión de Google cerrada"));
+    await _auth
+        .signOut()
+        // ignore: avoid_print
+        .then((onValue) => print("Sesión de Firebase cerrada"));
   }
 }

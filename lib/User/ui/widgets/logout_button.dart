@@ -12,24 +12,20 @@ class LogoutButton extends StatefulWidget {
 class _LogoutButtonState extends State<LogoutButton> {
   late UserBloc userBloc;
 
-  void onPressedButton() {
-    userBloc.signOut();
-  }
-
   @override
   Widget build(BuildContext context) {
     userBloc = BlocProvider.of(context);
 
     return Expanded(
         child: FloatingActionButton(
-      backgroundColor: const Color.fromRGBO(255, 255, 255, 0.6),
+      backgroundColor: Colors.black26,
       mini: true,
-      onPressed: onPressedButton,
+      onPressed: () => userBloc.signOut(),
       shape: const CircleBorder(),
       child: const Icon(
         Icons.exit_to_app,
         size: 20.0,
-        color: Color(0xFF4268D3),
+        color: Colors.white70,
       ),
     ));
   }

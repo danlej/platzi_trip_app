@@ -12,7 +12,7 @@ class ProfileTrips extends StatelessWidget {
     return Stack(
       children: <Widget>[
         const ProfileBackground(),
-        const ProfileHeader(),
+        ProfileHeader(),
         // Este contenedor hace que el ListView de 'Places' pase detrás de la sección
         // de 'Profile' dando ese efecto de quedar estática y siempre visible.
         Container(
