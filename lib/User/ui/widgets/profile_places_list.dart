@@ -5,12 +5,22 @@ import 'package:platzi_trip_app/Place/model/place.dart';
 // ignore: must_be_immutable
 class ProfilePlacesList extends StatelessWidget {
   Place place = Place(
-      'Knuckles Mountains Range',
-      'Hiking. Water fall hunting. Natural bath',
-      'Scenery & Photography',
-      '123,123,123');
-  Place place2 = Place('Mountains', 'Hiking. Water fall hunting. Natural bath',
-      'Scenery & Photography', '321,321,321');
+      name: "Knuckles Mountains Range",
+      description: "Hiking. Water fall hunting. Natural bath",
+      category: "Scenary & Photography",
+      urlImage:
+          "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+      likes: 3,
+      userOwner: null);
+  Place place2 = Place(
+      name: "Mountains",
+      description:
+          "Hiking. Water fall hunting. Natural bath', 'Scenery & Photography",
+      category: "Scenary & Photography",
+      urlImage:
+          "https://images.unsplash.com/photo-1524654458049-e36be0721fa2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+      likes: 10,
+      userOwner: null);
 
   ProfilePlacesList({super.key});
 
@@ -21,8 +31,8 @@ class ProfilePlacesList extends StatelessWidget {
           top: 10.0, left: 20.0, right: 20.0, bottom: 10.0),
       child: Column(
         children: <Widget>[
-          ProfilePlace('assets/images/river.jpg', place),
-          ProfilePlace('assets/images/mountain.jpg', place2),
+          ProfilePlace(place),
+          ProfilePlace(place2),
         ],
       ),
     );

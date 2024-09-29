@@ -58,9 +58,12 @@ Widget showProfileData(AsyncSnapshot snapshot) {
     print(snapshot.data);
 
     user = User(
+        uid: snapshot.data.uid,
         name: snapshot.data.displayName,
         email: snapshot.data.email,
-        photoURL: snapshot.data.photoURL);
+        photoURL: snapshot.data.photoURL,
+        myPlaces: null,
+        myFavoritePlaces: null);
 
     const title = Text(
       'Profile',

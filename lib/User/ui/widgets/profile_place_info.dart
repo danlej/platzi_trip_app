@@ -24,7 +24,7 @@ class ProfilePlaceInfo extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                this.place.where,
+                this.place.description,
                 style: const TextStyle(
                     color: Color.fromRGBO(0, 0, 0, 0.4),
                     fontFamily: 'Lato',
@@ -32,7 +32,7 @@ class ProfilePlaceInfo extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                this.place.type,
+                this.place.category,
                 style: const TextStyle(
                     color: Color.fromRGBO(0, 0, 0, 0.4),
                     fontFamily: 'Lato',
@@ -41,8 +41,8 @@ class ProfilePlaceInfo extends StatelessWidget {
               )
             ]));
 
-    final steps = Text(
-      'Steps ${this.place.steps}',
+    final likes = Text(
+      'Likes ${this.place.likes}',
       style: const TextStyle(
           fontFamily: 'Lato',
           fontSize: 14.0,
@@ -65,7 +65,7 @@ class ProfilePlaceInfo extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[place, placeInfo, steps],
+            children: <Widget>[place, placeInfo, likes],
           )),
     );
 
