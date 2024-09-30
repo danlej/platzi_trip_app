@@ -32,6 +32,7 @@ class _FloatingActionButtonGreenState extends State<FloatingActionButtonGreen> {
       tooltip: "Fav",
       onPressed: onPressedFav,
       shape: const CircleBorder(),
+      heroTag: null,
       child: _pressed
           ? const Icon(Icons.favorite)
           : const Icon(Icons.favorite_border),

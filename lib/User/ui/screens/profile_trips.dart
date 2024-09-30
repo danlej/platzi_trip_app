@@ -22,7 +22,7 @@ class ProfileTrips extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10.0),
             children: <Widget>[ProfilePlacesList()],
           ),
-        ),
+        )
       ],
     );
   }

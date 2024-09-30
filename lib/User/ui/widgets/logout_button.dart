@@ -22,6 +22,7 @@ class _LogoutButtonState extends State<LogoutButton> {
       mini: true,
       onPressed: () => userBloc.signOut(),
       shape: const CircleBorder(),
+      heroTag: null,
       child: const Icon(
         Icons.exit_to_app,
         size: 20.0,

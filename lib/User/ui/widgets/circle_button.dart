@@ -26,6 +26,7 @@ class _CircleButton extends State<CircleButton> {
       mini: widget.mini,
       onPressed: widget.onPressed,
       shape: const CircleBorder(),
+      heroTag: null,
       child: Icon(
         widget.icon,
         size: widget.iconSize,
