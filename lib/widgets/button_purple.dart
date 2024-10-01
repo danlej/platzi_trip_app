@@ -2,19 +2,26 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ButtonPurple extends StatelessWidget {
-  String buttonText;
-  ButtonPurple(this.buttonText, {super.key});
+  final String buttonText;
+  final VoidCallback? onPressed;
+
+  const ButtonPurple({
+    super.key,
+    required this.buttonText,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: onPressed,
+      /* () {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Navegando"),
+          SnackBar(
+            content: Text(buttonText),
           ),
         );
-      },
+      }, */
       child: Container(
         margin: const EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
         height: 50.0,

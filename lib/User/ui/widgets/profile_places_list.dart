@@ -7,7 +7,7 @@ class ProfilePlacesList extends StatelessWidget {
   Place place = Place(
       name: "Knuckles Mountains Range",
       description: "Hiking. Water fall hunting. Natural bath",
-      category: "Scenery & Photography",
+      location: "The Himalaya",
       urlImage:
           "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
       likes: 3,
@@ -15,7 +15,7 @@ class ProfilePlacesList extends StatelessWidget {
   Place place2 = Place(
       name: "Mountains",
       description: "Hiking. Water fall hunting. Natural bath",
-      category: "Scenery & Photography",
+      location: "The Alps",
       urlImage:
           "https://images.unsplash.com/photo-1524654458049-e36be0721fa2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
       likes: 10,

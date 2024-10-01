@@ -32,7 +32,7 @@ class ProfilePlaceInfo extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                this.place.category,
+                this.place.location,
                 style: const TextStyle(
                     color: Color.fromRGBO(0, 0, 0, 0.4),
                     fontFamily: 'Lato',
@@ -71,7 +71,10 @@ class ProfilePlaceInfo extends StatelessWidget {
 
     return Stack(
       alignment: const Alignment(0.8, 1.25),
-      children: <Widget>[card, const FloatingActionButtonGreen()],
+      children: <Widget>[
+        card,
+        const FloatingActionButtonGreen(iconData: Icons.favorite_border)
+      ],
     );
   }
 }

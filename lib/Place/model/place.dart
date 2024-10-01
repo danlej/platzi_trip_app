@@ -5,7 +5,7 @@ class Place {
   late String id;
   String name;
   String description;
-  String category;
+  String location;
   String urlImage;
   int? likes;
   User? userOwner;
@@ -14,8 +14,8 @@ class Place {
       {Key? key,
       required this.name,
       required this.description,
-      required this.category,
+      required this.location,
       required this.urlImage,
       this.likes,
-      required this.userOwner});
+      this.userOwner});
 }
