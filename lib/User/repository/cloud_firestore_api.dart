@@ -37,7 +37,18 @@ class CloudFirestoreAPI {
         'location': place.location,
         'urlImage': place.urlImage,
         'likes': place.likes,
-        'userOwner': "$USERS/${user.uid}",
+        'userOwner': _db.doc("$USERS/${user.uid}"), // reference
+      }).then((DocumentReference dr) {
+        dr.get().then((DocumentSnapshot snapshot) {
+          // Obtengo el id del place que se acaba de insertar a firestore.
+          final placeId = snapshot.id;
+          // Obtengo el usuario cuyo identificador ser user.uid y lo almaceno en el objeto tipo DocumentReference
+          DocumentReference refUsers = _db.collection(USERS).doc(user.uid);
+          // Agrego una referencia del place insertado en el array 'myPlaces' del usuario.
+          refUsers.update({
+            'myPlaces': FieldValue.arrayUnion([_db.doc("$PLACES/$placeId")])
+          });
+        });
       });
     }
   }
