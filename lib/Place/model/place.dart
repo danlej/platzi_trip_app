@@ -16,6 +16,6 @@ class Place {
       required this.description,
       required this.location,
       required this.urlImage,
-      this.likes,
+      this.likes = 0,
       this.userOwner});
 }

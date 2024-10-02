@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:platzi_trip_app/Place/model/place.dart';
+import 'package:platzi_trip_app/Place/repository/firebase_storage_repository.dart';
 import 'package:platzi_trip_app/User/repository/auth_repository.dart';
 import 'package:platzi_trip_app/User/repository/cloud_firestore_repository.dart';
 import 'package:platzi_trip_app/User/model/user.dart' as user_model;
@@ -13,6 +17,7 @@ class UserBloc implements Bloc {
   // Si no tuvieramos ese flujo de datos utilizariamos la clase StreamController.
   Stream<User?> streamFirebase = FirebaseAuth.instance.authStateChanges();
   Stream<User?> get authStatus => streamFirebase;
+  User? get currentUser => FirebaseAuth.instance.currentUser;
 
   // 1er Caso de uso de la clase User: SignIn a la aplicación Google.
   Future<User?> signIn() => authRepository.signInFirebase();
@@ -29,11 +34,15 @@ class UserBloc implements Bloc {
   Future<void> updatePlaceData(Place place) =>
       _cloudFirestoreRepository.updatePlaceDataFirestore(place);
 
+  // 5to Caso de uso de la clase User: Subir un archivo a Firebase Storage.
+  final firebaseStorageRepository = FirebaseStorageRepository();
+  Future<UploadTask> uploadFile(String path, File image) =>
+      firebaseStorageRepository.uploadFile(path, image);
+
   void checkCurrentUser() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
+    if (currentUser != null) {
       // ignore: avoid_print
-      print("Usuario autenticado: ${user.displayName}");
+      print("Usuario autenticado: ${currentUser!.displayName}");
     } else {
       // ignore: avoid_print
       print("No hay usuario autenticado");

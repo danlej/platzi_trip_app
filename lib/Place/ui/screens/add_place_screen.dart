@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:platzi_trip_app/Place/model/place.dart';
@@ -11,9 +13,9 @@ import 'package:platzi_trip_app/widgets/text_input.dart';
 import 'package:platzi_trip_app/widgets/title_header.dart';
 
 class AddPlaceScreen extends StatefulWidget {
-  final File? image;
+  final File image;
 
-  const AddPlaceScreen({super.key, this.image});
+  const AddPlaceScreen({super.key, required this.image});
 
   @override
   State<AddPlaceScreen> createState() => _AddPlaceScreenState();
@@ -62,7 +64,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                 alignment: Alignment.center,
                 child: CardImageWithFabIcon(
                   width: 350.0,
-                  pathImage: widget.image!.path,
+                  pathImage: widget.image.path,
                   iconData: Icons.camera_alt,
                   fromCamera: true,
                 ),
@@ -93,23 +95,50 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                 child: ButtonPurple(
                   buttonText: "Add Place",
                   onPressed: () {
-                    // 1. Subir la imagen al 'Firebase Storage': nos va a devolver una URL de la imagen.
-                    // 2. En Cloud Firestore vamos a insertar todo el objeto place con
-                    // sus correspondientes datos: { title, description, url, userOwner, likes }
-                    userBloc
-                        .updatePlaceData(Place(
-                      name: controllerTitlePlace.text,
-                      description: controllerDescriptionPlace.text,
-                      location: controllerLocationPlace.text,
-                      urlImage: widget.image!.path,
-                      likes: 0,
-                    ))
-                        .whenComplete(() {
-                      // ignore: avoid_print
-                      print("TERMINO");
-                      // ignore: use_build_context_synchronously
-                      Navigator.pop(context);
-                    });
+                    // 1. Obtener el uid del usuario que esta logueado actualmente.
+                    User? currentUser = userBloc.currentUser;
+                    if (currentUser != null) {
+                      String uid = currentUser.uid;
+
+                      /// El path de la imagen a subir consta de: la carpeta es el uid del user logueado,
+                      /// y el nombre del archivo se compone de la fecha en la cual se subio + .jpg como extensión.
+                      String path = "$uid/${DateTime.now().toString()}.jpg";
+
+                      // 2. Subimos la imagen a 'Firebase Storage': nos va a devolver una URL de la imagen.
+                      userBloc
+                          .uploadFile(path, widget.image)
+                          .then((UploadTask storageUploadTask) {
+                        // Obtenemos el TaskSnapshot cuando la subida se complete.
+                        storageUploadTask.then((TaskSnapshot snapshot) async {
+                          // Obtenemos la URL de la descarga de la imagen.
+                          snapshot.ref.getDownloadURL().then((urlImage) {
+                            // ignore: avoid_print
+                            print("URLIMAGE: $urlImage");
+
+                            /// 3. En Cloud Firestore vamos a insertar todo el objeto place con sus correspondientes
+                            /// datos: { name*, description*, location*, urlImage*, userOwner, likes }
+                            /// * = required
+                            userBloc
+                                .updatePlaceData(Place(
+                              name: controllerTitlePlace.text,
+                              description: controllerDescriptionPlace.text,
+                              location: controllerLocationPlace.text,
+                              urlImage: urlImage,
+                            ))
+                                .whenComplete(() {
+                              // ignore: avoid_print
+                              print("TERMINO");
+                              // ignore: use_build_context_synchronously
+                              Navigator.pop(context);
+                            });
+                          }).catchError((error) =>
+                              // ignore: avoid_print, invalid_return_type_for_catch_error
+                              print("Error al obtener la URL: $error"));
+                        }).catchError((error) =>
+                            // ignore: avoid_print, invalid_return_type_for_catch_error
+                            print("Error al subir el archivo: $error"));
+                      });
+                    }
                   },
                 ),
               )
