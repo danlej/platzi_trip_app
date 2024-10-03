@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:platzi_trip_app/Place/model/place.dart';
 import 'package:platzi_trip_app/User/model/user.dart' as user_model;
+import 'package:platzi_trip_app/User/ui/widgets/profile_place.dart';
 
 // ignore_for_file: non_constant_identifier_names
 
@@ -51,5 +52,17 @@ class CloudFirestoreAPI {
         });
       });
     }
+  }
+
+  List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesListSnapshot) {
+    List<ProfilePlace> profilePlaces = [];
+    for (var p in placesListSnapshot) {
+      profilePlaces.add(ProfilePlace(Place(
+          name: p['name'],
+          description: p['description'],
+          location: p['location'],
+          urlImage: p['urlImage'])));
+    }
+    return profilePlaces;
   }
 }
