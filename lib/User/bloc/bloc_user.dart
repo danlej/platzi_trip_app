@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:platzi_trip_app/Place/model/place.dart';
 import 'package:platzi_trip_app/Place/repository/firebase_storage_repository.dart';
+import 'package:platzi_trip_app/Place/ui/widgets/card_image_with_fab_icon.dart';
 import 'package:platzi_trip_app/User/repository/auth_repository.dart';
 import 'package:platzi_trip_app/User/repository/cloud_firestore_api.dart';
 import 'package:platzi_trip_app/User/repository/cloud_firestore_repository.dart';
@@ -43,7 +44,8 @@ class UserBloc implements Bloc {
 
   Stream<QuerySnapshot> get placesStream => placesListStream;
 
-  List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesListSnapshot) =>
+  List<CardImageWithFabIcon> buildPlaces(
+          List<DocumentSnapshot> placesListSnapshot) =>
       _cloudFirestoreRepository.buildPlaces(placesListSnapshot);
 
   // Stream con un filtro que me permite traer los places del usuario cuyo uid
@@ -55,6 +57,9 @@ class UserBloc implements Bloc {
           isEqualTo: FirebaseFirestore.instance
               .doc("${CloudFirestoreAPI().USERS}/$uid"))
       .snapshots();
+
+  List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesListSnapshot) =>
+      _cloudFirestoreRepository.buildMyPlaces(placesListSnapshot);
 
   // 5to Caso de uso de la clase User: Subir un archivo a Firebase Storage.
   final firebaseStorageRepository = FirebaseStorageRepository();

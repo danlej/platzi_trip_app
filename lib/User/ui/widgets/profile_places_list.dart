@@ -43,7 +43,7 @@ class ProfilePlacesList extends StatelessWidget {
               case ConnectionState.done:
               default:
                 return Column(
-                    children: userBloc.buildPlaces(snapshot.data.docs));
+                    children: userBloc.buildMyPlaces(snapshot.data.docs));
             }
           }),
     );
