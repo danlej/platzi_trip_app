@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'package:platzi_trip_app/User/bloc/bloc_user.dart';
 import 'package:platzi_trip_app/User/ui/widgets/logout_button.dart';
 import 'package:platzi_trip_app/User/ui/widgets/user_info.dart';
 import 'package:platzi_trip_app/User/ui/widgets/button_bar.dart';
@@ -8,35 +6,43 @@ import 'package:platzi_trip_app/User/model/user.dart';
 
 // ignore: must_be_immutable
 class ProfileHeader extends StatelessWidget {
-  late UserBloc userBloc;
+  User user;
 
-  ProfileHeader({super.key});
+  ProfileHeader({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
-    userBloc = BlocProvider.of<UserBloc>(context);
+    const title = Text(
+      'Profile',
+      style: TextStyle(
+          fontFamily: 'Lato',
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 30.0),
+    );
 
-    return StreamBuilder(
-      stream: userBloc.authStatus, // userBloc.streamFirebase,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            return const CircularProgressIndicator();
-          case ConnectionState.waiting:
-            return const CircularProgressIndicator();
-          case ConnectionState.active:
-            return showProfileData(snapshot);
-          case ConnectionState.done:
-            return showProfileData(snapshot);
-          default:
-            return const CircularProgressIndicator();
-        }
-      },
+    return Container(
+      margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 50.0),
+      child: Column(
+        children: <Widget>[
+          const Row(
+            children: <Widget>[
+              title,
+              Spacer(
+                flex: 3,
+              ),
+              LogoutButton(),
+            ],
+          ),
+          UserInfo(user: user),
+          ButtonsBar()
+        ],
+      ),
     );
   }
 }
 
-Widget showProfileData(AsyncSnapshot snapshot) {
+/* Widget showProfileData(AsyncSnapshot snapshot) {
   User user;
   // snapshot contiene la data traida desde el stream.
   if (!snapshot.hasData || snapshot.hasError) {
@@ -62,8 +68,8 @@ Widget showProfileData(AsyncSnapshot snapshot) {
         name: snapshot.data.displayName,
         email: snapshot.data.email,
         photoURL: snapshot.data.photoURL,
-        myPlaces: null,
-        myFavoritePlaces: null);
+        myPlaces: snapshot.data.myPlaces,
+        myFavoritePlaces: snapshot.data.myFavoritePlaces);
 
     const title = Text(
       'Profile',
@@ -87,12 +93,10 @@ Widget showProfileData(AsyncSnapshot snapshot) {
               LogoutButton(),
             ],
           ),
-          UserInfo(
-            user: user,
-          ),
+          UserInfo(user: user),
           ButtonsBar()
         ],
       ),
     );
   }
-}
+} */

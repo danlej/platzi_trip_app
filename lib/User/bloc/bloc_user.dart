@@ -46,6 +46,16 @@ class UserBloc implements Bloc {
   List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesListSnapshot) =>
       _cloudFirestoreRepository.buildPlaces(placesListSnapshot);
 
+  // Stream con un filtro que me permite traer los places del usuario cuyo uid
+  // paso como parámetro a dicho stream.
+  Stream<QuerySnapshot> myPlacesListStream(String uid) => FirebaseFirestore
+      .instance
+      .collection(CloudFirestoreAPI().PLACES)
+      .where("userOwner",
+          isEqualTo: FirebaseFirestore.instance
+              .doc("${CloudFirestoreAPI().USERS}/$uid"))
+      .snapshots();
+
   // 5to Caso de uso de la clase User: Subir un archivo a Firebase Storage.
   final firebaseStorageRepository = FirebaseStorageRepository();
   Future<UploadTask> uploadFile(String path, File image) =>

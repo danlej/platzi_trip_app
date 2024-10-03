@@ -15,6 +15,6 @@ class User {
       required this.name,
       required this.email,
       required this.photoURL,
-      required this.myPlaces,
-      required this.myFavoritePlaces});
+      this.myPlaces,
+      this.myFavoritePlaces});
 }

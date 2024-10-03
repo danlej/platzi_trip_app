@@ -20,8 +20,8 @@ class CloudFirestoreAPI {
       'name': user.name,
       'email': user.email,
       'photoURL': user.photoURL,
-      'myPlaces': user.myPlaces,
-      'myFavoritePlaces': user.myFavoritePlaces,
+      //'myPlaces': user.myPlaces,
+      //'myFavoritePlaces': user.myFavoritePlaces,
       'lastSignIn': DateTime.now()
     }, SetOptions(merge: true));
   }
@@ -61,7 +61,8 @@ class CloudFirestoreAPI {
           name: p['name'],
           description: p['description'],
           location: p['location'],
-          urlImage: p['urlImage'])));
+          urlImage: p['urlImage'],
+          likes: p['likes'])));
     }
     return profilePlaces;
   }

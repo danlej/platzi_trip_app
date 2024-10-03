@@ -17,7 +17,7 @@ class _PlatziTripsState extends State<PlatziTrips> {
   final List<Widget> widgetsChildren = [
     const HomeTrips(),
     const SearchTrips(),
-    const ProfileTrips()
+    ProfileTrips()
   ];
 
   void onTapTapped(int index) {

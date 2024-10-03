@@ -62,16 +62,16 @@ class _SignInScreenState extends State<SignInScreen> {
               ButtonGreen(
                   text: "Login with Gmail",
                   onPressed: () {
-                    //userBloc.signOut();
+                    userBloc.signOut();
                     userBloc.signIn().then((User? user) {
                       if (user != null) {
                         userBloc.updateUserData(user_model.User(
                             uid: user.uid,
                             name: user.displayName ?? "",
                             email: user.email ?? "",
-                            photoURL: user.photoURL ?? "",
-                            myPlaces: null,
-                            myFavoritePlaces: null));
+                            photoURL: user.photoURL ?? ""));
+                        //myPlaces: null,
+                        //myFavoritePlaces: null));
                       }
                     });
                   },
