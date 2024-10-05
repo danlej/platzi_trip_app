@@ -44,9 +44,9 @@ class UserBloc implements Bloc {
 
   Stream<QuerySnapshot> get placesStream => placesListStream;
 
-  List<CardImageWithFabIcon> buildPlaces(
-          List<DocumentSnapshot> placesListSnapshot) =>
-      _cloudFirestoreRepository.buildPlaces(placesListSnapshot);
+  List buildPlaces(
+          List<DocumentSnapshot> placesListSnapshot, user_model.User user) =>
+      _cloudFirestoreRepository.buildPlaces(placesListSnapshot, user);
 
   // Stream con un filtro que me permite traer los places del usuario cuyo uid
   // paso como parámetro a dicho stream.
@@ -65,6 +65,9 @@ class UserBloc implements Bloc {
   final firebaseStorageRepository = FirebaseStorageRepository();
   Future<UploadTask> uploadFile(String path, File image) =>
       firebaseStorageRepository.uploadFile(path, image);
+
+  Future likePlace(Place place, String uid) =>
+      _cloudFirestoreRepository.likePlace(place, uid);
 
   void checkCurrentUser() async {
     if (currentUser != null) {

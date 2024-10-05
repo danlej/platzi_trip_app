@@ -17,7 +17,7 @@ class HomeTrips extends StatelessWidget {
             ReviewList()
           ],
         ),
-        const HeaderAppBar()
+        HeaderAppBar()
       ],
     );
   }

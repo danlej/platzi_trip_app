@@ -63,7 +63,7 @@ class ProfileTrips extends StatelessWidget {
           // dando un efecto de quedar estática y dejando los datos de perfil siempre visibles.
           Container(
             // Este margen es para NO tapar la sección de 'Profile' con el ListView.
-            margin: const EdgeInsets.only(top: 300.0),
+            margin: const EdgeInsets.only(top: 310.0),
             child: ListView(
               padding: const EdgeInsets.only(top: 10.0),
               children: <Widget>[ProfilePlacesList(user: user)],
