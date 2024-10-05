@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:platzi_trip_app/Place/model/place.dart';
 import 'package:platzi_trip_app/Place/ui/widgets/card_image_with_fab_icon.dart';
 import 'package:platzi_trip_app/Place/ui/widgets/title_input_location.dart';
@@ -12,10 +13,11 @@ import 'package:platzi_trip_app/widgets/gradient_back.dart';
 import 'package:platzi_trip_app/widgets/text_input.dart';
 import 'package:platzi_trip_app/widgets/title_header.dart';
 
+// ignore: must_be_immutable
 class AddPlaceScreen extends StatefulWidget {
-  final File image;
+  File image;
 
-  const AddPlaceScreen({super.key, required this.image});
+  AddPlaceScreen({super.key, required this.image});
 
   @override
   State<AddPlaceScreen> createState() => _AddPlaceScreenState();
@@ -25,6 +27,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
   @override
   Widget build(BuildContext context) {
     UserBloc userBloc = BlocProvider.of<UserBloc>(context);
+    final picker = ImagePicker();
 
     final controllerTitlePlace = TextEditingController();
     final controllerDescriptionPlace = TextEditingController();
@@ -66,7 +69,19 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   width: 350.0,
                   pathImage: widget.image.path,
                   iconData: Icons.camera_alt,
-                  fromCamera: true,
+                  internet: false,
+                  onPressedFabIcon: () {
+                    picker
+                        .pickImage(source: ImageSource.camera)
+                        .then((XFile? image) {
+                      if (image != null) {
+                        setState(() {
+                          widget.image = File(image.path);
+                        });
+                      }
+                      // ignore: invalid_return_type_for_catch_error, avoid_print
+                    }).catchError((onError) => print(onError));
+                  },
                 ),
               ),
               // TextField Title

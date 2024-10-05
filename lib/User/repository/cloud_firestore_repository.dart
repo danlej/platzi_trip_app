@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:platzi_trip_app/Place/model/place.dart';
-import 'package:platzi_trip_app/Place/ui/widgets/card_image_with_fab_icon.dart';
 import 'package:platzi_trip_app/User/model/user.dart';
 import 'package:platzi_trip_app/User/repository/cloud_firestore_api.dart';
 import 'package:platzi_trip_app/User/ui/widgets/profile_place.dart';
@@ -17,7 +16,8 @@ class CloudFirestoreRepository {
   List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesListSnapshot) =>
       _cloudFirestoreAPI.buildMyPlaces(placesListSnapshot);
 
-  List buildPlaces(List<DocumentSnapshot> placesListSnapshot, User user) =>
+  List<Place> buildPlaces(
+          List<DocumentSnapshot> placesListSnapshot, User user) =>
       _cloudFirestoreAPI.buildPlaces(placesListSnapshot, user);
 
   Future likePlace(Place place, String uid) =>

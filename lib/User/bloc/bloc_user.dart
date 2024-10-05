@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,7 +7,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:platzi_trip_app/Place/model/place.dart';
 import 'package:platzi_trip_app/Place/repository/firebase_storage_repository.dart';
-import 'package:platzi_trip_app/Place/ui/widgets/card_image_with_fab_icon.dart';
 import 'package:platzi_trip_app/User/repository/auth_repository.dart';
 import 'package:platzi_trip_app/User/repository/cloud_firestore_api.dart';
 import 'package:platzi_trip_app/User/repository/cloud_firestore_repository.dart';
@@ -44,7 +44,7 @@ class UserBloc implements Bloc {
 
   Stream<QuerySnapshot> get placesStream => placesListStream;
 
-  List buildPlaces(
+  List<Place> buildPlaces(
           List<DocumentSnapshot> placesListSnapshot, user_model.User user) =>
       _cloudFirestoreRepository.buildPlaces(placesListSnapshot, user);
 
@@ -68,6 +68,14 @@ class UserBloc implements Bloc {
 
   Future likePlace(Place place, String uid) =>
       _cloudFirestoreRepository.likePlace(place, uid);
+
+  // Creamos un stream para implementar la muestra de los detalles de cada Place.
+  // 1. Definimos el tipo de elemento que será escuchado por el StreamController: Place.
+  StreamController placeSelectedStreamController = StreamController();
+  // 2. Convertimos este StreamController en algo que pueda leer el StreamBuilder en su parámetro 'stream'
+  Stream get placeSelectedStream => placeSelectedStreamController.stream;
+  // 3. Dejamos disponible el Stream para que se le pueda insertar el elemento Place.
+  StreamSink get placeSelectedSink => placeSelectedStreamController.sink;
 
   void checkCurrentUser() async {
     if (currentUser != null) {

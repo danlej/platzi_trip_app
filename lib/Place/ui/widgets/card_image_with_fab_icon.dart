@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:platzi_trip_app/widgets/floating_action_button_green.dart';
 
@@ -11,7 +12,7 @@ class CardImageWithFabIcon extends StatelessWidget {
   final VoidCallback? onPressedFabIcon;
   final IconData iconData;
   final double left;
-  final bool fromCamera;
+  final bool internet;
 
   const CardImageWithFabIcon(
       {super.key,
@@ -21,7 +22,7 @@ class CardImageWithFabIcon extends StatelessWidget {
       this.onPressedFabIcon,
       required this.iconData,
       this.left = 0.0,
-      this.fromCamera = false});
+      this.internet = true});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +33,9 @@ class CardImageWithFabIcon extends StatelessWidget {
       decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: fromCamera
-                ? FileImage(File(pathImage))
-                : NetworkImage(pathImage),
+            image: internet
+                ? CachedNetworkImageProvider(pathImage)
+                : FileImage(File(pathImage)),
           ),
           borderRadius: const BorderRadius.all(Radius.circular(10.0)),
           shape: BoxShape.rectangle,

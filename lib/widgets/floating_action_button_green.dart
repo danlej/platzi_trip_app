@@ -40,7 +40,10 @@ class _FloatingActionButtonGreenState extends State<FloatingActionButtonGreen> {
       onPressed: widget.onPressed,
       shape: const CircleBorder(),
       heroTag: null,
-      child: Icon(widget.iconData),
+      child: Icon(
+        widget.iconData,
+        color: Colors.black45,
+      ),
       /* child: _pressed
           ? const Icon(Icons.favorite)
           : const Icon(Icons.favorite_border), */
