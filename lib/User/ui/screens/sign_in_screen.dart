@@ -47,18 +47,21 @@ class _SignInScreenState extends State<SignInScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Flexible(
-                  child: Container(
-                      padding: const EdgeInsets.only(left: 15.0),
-                      width: screenWidth,
-                      child: const Text(
-                        "Welcome \nThis is your Travel App.",
-                        style: TextStyle(
-                            fontSize: 37.0,
-                            fontFamily: "Lato",
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ))),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                width: screenWidth,
+                child: const FittedBox(
+                  fit: BoxFit.contain,
+                  child: Text(
+                    "Welcome \nThis is your Travel App.",
+                    style: TextStyle(
+                        fontSize: 37.0,
+                        fontFamily: "Lato",
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
               ButtonGreen(
                   text: "Login with Gmail",
                   onPressed: () {

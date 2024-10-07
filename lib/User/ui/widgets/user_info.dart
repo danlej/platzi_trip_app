@@ -28,17 +28,25 @@ class UserInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-            margin: const EdgeInsets.only(bottom: 5.0),
-            child: Text(user.name,
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontFamily: 'Lato',
-                ))),
-        Text(user.email,
-            style: const TextStyle(
-                fontSize: 15.0, color: Colors.white30, fontFamily: 'Lato')),
+          width: MediaQuery.of(context).size.width * 0.60,
+          margin: const EdgeInsets.only(bottom: 5.0),
+          child: Text(user.name,
+              style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontFamily: 'Lato',
+              )),
+        ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.60,
+          child: Text(user.email,
+              style: const TextStyle(
+                fontSize: 15.0,
+                color: Colors.white30,
+                fontFamily: 'Lato',
+              )),
+        ),
       ],
     );
 

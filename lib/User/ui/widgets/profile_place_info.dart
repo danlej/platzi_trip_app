@@ -73,7 +73,10 @@ class ProfilePlaceInfo extends StatelessWidget {
       alignment: const Alignment(0.8, 1.25),
       children: <Widget>[
         card,
-        const FloatingActionButtonGreen(iconData: Icons.favorite_border)
+        const FloatingActionButtonGreen(
+          iconData: Icons.favorite_border,
+          iconColor: Colors.black54,
+        )
       ],
     );
   }

@@ -15,7 +15,7 @@ class GradientBack extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    height ??= screenHeight;
+    height ??= screenHeight; // If (height == null) then height = screenHeight;
 
     return Container(
       //padding: const EdgeInsets.only(left: 13.0),

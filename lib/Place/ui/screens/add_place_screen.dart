@@ -69,6 +69,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   width: 350.0,
                   pathImage: widget.image.path,
                   iconData: Icons.camera_alt,
+                  iconColor: Colors.black54,
                   internet: false,
                   onPressedFabIcon: () {
                     picker

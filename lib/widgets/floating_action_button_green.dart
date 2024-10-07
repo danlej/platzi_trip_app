@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class FloatingActionButtonGreen extends StatefulWidget {
   final IconData iconData;
+  final Color iconColor;
   final VoidCallback? onPressed;
 
   const FloatingActionButtonGreen({
     super.key,
     required this.iconData,
+    this.iconColor = Colors.white70,
     this.onPressed,
   });
 
@@ -42,7 +44,14 @@ class _FloatingActionButtonGreenState extends State<FloatingActionButtonGreen> {
       heroTag: null,
       child: Icon(
         widget.iconData,
-        color: Colors.black45,
+        color: widget.iconColor,
+        shadows: [
+          Shadow(
+            color: Colors.grey.withOpacity(0.5),
+            offset: const Offset(2, 2),
+            blurRadius: 3,
+          )
+        ],
       ),
       /* child: _pressed
           ? const Icon(Icons.favorite)

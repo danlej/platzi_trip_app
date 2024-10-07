@@ -75,6 +75,7 @@ class _CardImageListState extends State<CardImageList> {
           child: CardImageWithFabIcon(
             pathImage: place.urlImage,
             iconData: place.liked ? iconDataLiked : iconDataLike,
+            iconColor: place.liked ? Colors.red : Colors.black54,
             onPressedFabIcon: () => setLiked(place),
             left: 20.0,
           ),
