@@ -15,13 +15,13 @@ class CloudFirestoreAPI {
 
   void updateUserData(user_model.User user) async {
     DocumentReference ref = _db.collection(USERS).doc(user.uid);
+    // Si el documento no existe, se creará. Si el documento existe, su contenido
+    // se fusionará con los datos recién proporcionados. Si queremos sobreescribir los datos SetOptions(merge: false)
     return await ref.set({
       'uid': user.uid,
       'name': user.name,
       'email': user.email,
       'photoURL': user.photoURL,
-      //'myPlaces': user.myPlaces,
-      //'myFavoritePlaces': user.myFavoritePlaces,
       'lastSignIn': DateTime.now()
     }, SetOptions(merge: true));
   }
@@ -101,6 +101,12 @@ class CloudFirestoreAPI {
         .get()
         .then((DocumentSnapshot snapshot) {
       int likes = snapshot['likes'];
+
+      _db.collection(USERS).doc(uid).update({
+        'myFavoritePlaces': place.liked
+            ? FieldValue.arrayUnion([_db.doc("$PLACES/${place.id}")])
+            : FieldValue.arrayRemove([_db.doc("$PLACES/${place.id}")])
+      });
 
       _db.collection(PLACES).doc(place.id).update({
         'likes': place.liked ? likes + 1 : likes - 1,
