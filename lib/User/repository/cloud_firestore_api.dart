@@ -38,6 +38,7 @@ class CloudFirestoreAPI {
         'location': place.location,
         'urlImage': place.urlImage,
         'likes': place.likes,
+        'creationDate': DateTime.now(),
         'userOwner': _db.doc("$USERS/${user.uid}"), // reference
         'usersLiked': [],
       }).then((DocumentReference dr) {
@@ -58,12 +59,17 @@ class CloudFirestoreAPI {
   List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesListSnapshot) {
     List<ProfilePlace> profilePlaces = [];
     for (var p in placesListSnapshot) {
-      profilePlaces.add(ProfilePlace(Place(
-          name: p['name'],
-          description: p['description'],
-          location: p['location'],
-          urlImage: p['urlImage'],
-          likes: p['likes'])));
+      profilePlaces.add(
+        ProfilePlace(
+          Place(
+              name: p['name'],
+              description: p['description'],
+              location: p['location'],
+              urlImage: p['urlImage'],
+              likes: p['likes'],
+              creationDate: p['creationDate']?.toDate()),
+        ),
+      );
     }
     return profilePlaces;
   }
@@ -80,6 +86,7 @@ class CloudFirestoreAPI {
         location: p['location'],
         urlImage: p['urlImage'],
         likes: p['likes'],
+        creationDate: p['creationDate']?.toDate(),
       );
       List usersLikedRefs = p['usersLiked'];
       place.liked = false;
@@ -115,5 +122,30 @@ class CloudFirestoreAPI {
             : FieldValue.arrayRemove([_db.doc("$USERS/$uid")])
       });
     });
+  }
+
+  // Stream con un filtro que me permite obtener los places del usuario cuyo uid
+  // paso como parámetro a dicho stream.
+  Stream<QuerySnapshot> myPlacesListStream(String uid) => _db
+      .collection(CloudFirestoreAPI().PLACES)
+      .where("userOwner",
+          isEqualTo: FirebaseFirestore.instance
+              .doc("${CloudFirestoreAPI().USERS}/$uid"))
+      .snapshots();
+
+  Future<DocumentSnapshot> getPlace(String id) =>
+      _db.collection(PLACES).doc(id).get();
+
+  Future<DocumentSnapshot> myLastPlace(String uid) async {
+    QuerySnapshot querySnapshot = await _db
+        .collection(PLACES)
+        .where("userOwner",
+            isEqualTo: _db.doc("${CloudFirestoreAPI().USERS}/$uid"))
+        .limit(1)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) return querySnapshot.docs.first;
+
+    throw Exception('No se encontré nungún documento para este usuario.');
   }
 }

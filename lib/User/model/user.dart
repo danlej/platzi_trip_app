@@ -17,4 +17,14 @@ class User {
       required this.photoURL,
       this.myPlaces,
       this.myFavoritePlaces});
+
+  factory User.fromFirestore(Map<String, dynamic> data, String documentId) {
+    return User(
+        uid: data['uid'],
+        name: data['name'],
+        email: data['email'],
+        photoURL: data['photoURL']);
+    //myPlaces: List.from(data['myPlaces']),
+    //myFavoritePlaces: List.from(data['myFavoritePlaces']));
+  }
 }

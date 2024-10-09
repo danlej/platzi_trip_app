@@ -22,4 +22,18 @@ class CloudFirestoreRepository {
 
   Future likePlace(Place place, String uid) =>
       _cloudFirestoreAPI.likePlace(place, uid);
+
+  Stream<QuerySnapshot> myPlacesListStream(String uid) =>
+      _cloudFirestoreAPI.myPlacesListStream(uid);
+
+  Future<Place> getPlace(String id) =>
+      _cloudFirestoreAPI.getPlace(id).then((DocumentSnapshot snapshot) {
+        return Place.fromFirestore(
+            snapshot.data() as Map<String, dynamic>, snapshot.id);
+      });
+
+  Future<Place> myLastPlace(String uid) => _cloudFirestoreAPI
+      .myLastPlace(uid)
+      .then((DocumentSnapshot snapshot) => Place.fromFirestore(
+          snapshot.data() as Map<String, dynamic>, snapshot.id));
 }

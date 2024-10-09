@@ -44,19 +44,12 @@ class UserBloc implements Bloc {
 
   Stream<QuerySnapshot> get placesStream => placesListStream;
 
+  Stream<QuerySnapshot> myPlacesListStream(String uid) =>
+      _cloudFirestoreRepository.myPlacesListStream(uid);
+
   List<Place> buildPlaces(
           List<DocumentSnapshot> placesListSnapshot, user_model.User user) =>
       _cloudFirestoreRepository.buildPlaces(placesListSnapshot, user);
-
-  // Stream con un filtro que me permite traer los places del usuario cuyo uid
-  // paso como parámetro a dicho stream.
-  Stream<QuerySnapshot> myPlacesListStream(String uid) => FirebaseFirestore
-      .instance
-      .collection(CloudFirestoreAPI().PLACES)
-      .where("userOwner",
-          isEqualTo: FirebaseFirestore.instance
-              .doc("${CloudFirestoreAPI().USERS}/$uid"))
-      .snapshots();
 
   List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesListSnapshot) =>
       _cloudFirestoreRepository.buildMyPlaces(placesListSnapshot);
@@ -68,6 +61,9 @@ class UserBloc implements Bloc {
 
   Future likePlace(Place place, String uid) =>
       _cloudFirestoreRepository.likePlace(place, uid);
+
+  Future<Place> myLastPlace(String uid) =>
+      _cloudFirestoreRepository.myLastPlace(uid);
 
   // Creamos un stream para implementar la muestra de los detalles de cada Place.
   // 1. Definimos el tipo de elemento que será escuchado por el StreamController: Place.
