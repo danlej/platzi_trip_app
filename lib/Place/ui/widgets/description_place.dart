@@ -50,13 +50,18 @@ class DescriptionPlace extends StatelessWidget {
     Widget descriptionWidget(String descriptionPlace) {
       return Container(
         margin: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-        child: Text(
-          descriptionPlace,
-          style: const TextStyle(
-              fontFamily: "Lato",
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF56575a)),
+        constraints: const BoxConstraints(
+          maxHeight: 150.0,
+        ),
+        child: SingleChildScrollView(
+          child: Text(
+            descriptionPlace,
+            style: const TextStyle(
+                fontFamily: "Lato",
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF56575a)),
+          ),
         ),
       );
     }

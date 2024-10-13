@@ -19,8 +19,9 @@ class UserInfo extends StatelessWidget {
           shape: BoxShape.circle,
           image: DecorationImage(
             fit: BoxFit.cover,
-            //image: AssetImage(user.photoURL),
-            image: NetworkImage(user.photoURL),
+            image: (user.photoURL?.isNotEmpty ?? false)
+                ? NetworkImage(user.photoURL!)
+                : const AssetImage("assets/images/photo-coming-son.jpg"),
           )),
     );
 
@@ -30,7 +31,7 @@ class UserInfo extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width * 0.60,
           margin: const EdgeInsets.only(bottom: 5.0),
-          child: Text(user.name,
+          child: Text(user.name ?? "",
               style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
@@ -40,7 +41,7 @@ class UserInfo extends StatelessWidget {
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.60,
-          child: Text(user.email,
+          child: Text(user.email ?? "",
               style: const TextStyle(
                 fontSize: 15.0,
                 color: Colors.white30,

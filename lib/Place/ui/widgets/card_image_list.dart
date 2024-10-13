@@ -39,14 +39,14 @@ class _CardImageListState extends State<CardImageList> {
       userBloc.placeSelectedSink.add(place);
     });
 
-    /* Place(
+    /* userBloc.placeSelectedSink.add(Place(
       name: 'Duwili Ella',
-      description: loremIpsum(50),
+      description: loremIpsum(100),
       location: 'Netherland',
       urlImage:
           'https://firebasestorage.googleapis.com/v0/b/platzitripsflutter-ae73d.appspot.com/o/RTtmBPbTuCQhmpcofhtdEYpDtvC2%2F2024-10-07%2014%3A44%3A07.496510.jpg?alt=media&token=a1e298b8-0121-452c-ad84-2a92604dc326',
       likes: 5,
-    ) */
+    )); */
   }
 
   @override
