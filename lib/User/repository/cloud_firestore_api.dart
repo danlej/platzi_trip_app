@@ -79,15 +79,22 @@ class CloudFirestoreAPI {
     List<Place> places = [];
 
     for (var p in placesListSnapshot) {
+      // Obtenemos los datos y convertimos correctamente los tipos
+      var data = p.data() as Map<String, dynamic>;
+
       Place place = Place(
         id: p.id,
-        name: p['name'],
-        description: p['description'],
-        location: p['location'],
-        urlImage: p['urlImage'],
-        likes: p['likes'],
-        creationDate: p['creationDate']?.toDate(),
+        name: data['name'],
+        description: data['description'],
+        location: data['location'],
+        urlImage: data['urlImage'],
+        likes: data['likes'] ?? 0,
+        creationDate: (data['creationDate'] != null)
+            ? (data['creationDate'] as Timestamp)
+                .toDate() // Convertir Timestamp a DateTime
+            : null,
       );
+
       List usersLikedRefs = p['usersLiked'];
       place.liked = false;
       for (var drUL in usersLikedRefs) {
@@ -98,7 +105,7 @@ class CloudFirestoreAPI {
       places.add(place);
     }
 
-    return places;
+    return Place.sortByCreationDate(places);
   }
 
   Future likePlace(Place place, String uid) async {
@@ -139,6 +146,7 @@ class CloudFirestoreAPI {
   Future<DocumentSnapshot> myLastPlace(String uid) async {
     QuerySnapshot querySnapshot = await _db
         .collection(PLACES)
+        .orderBy("creationDate")
         .where("userOwner",
             isEqualTo: _db.doc("${CloudFirestoreAPI().USERS}/$uid"))
         .limit(1)
