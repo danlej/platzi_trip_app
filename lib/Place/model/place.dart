@@ -27,15 +27,13 @@ class Place {
       this.creationDate,
       this.userOwner});
 
-  static Future<Place> fromFirestore(
-      Map<String, dynamic> data, String documentId) async {
+  static Future<Place> fromFirestore(Map<String, dynamic> data, String documentId) async {
     DocumentReference? userOwnerRef = data['userOwner'];
 
     User? userOwner;
     if (userOwnerRef != null) {
       DocumentSnapshot userSnapshot = await userOwnerRef.get();
-      userOwner = User.fromFirestore(
-          userSnapshot.data() as Map<String, dynamic>, userSnapshot.id);
+      userOwner = User.fromFirestore(userSnapshot.data() as Map<String, dynamic>, userSnapshot.id);
     }
 
     return Place(
@@ -45,7 +43,7 @@ class Place {
       location: data['location'],
       urlImage: data['urlImage'],
       likes: data['likes'] ?? 0,
-      usersLiked: List<User>.from(data['usersLiked'] ?? []),
+      //usersLiked: List<User>.from(data['usersLiked'] ?? []),
       creationDate: data['creationDate']?.toDate(),
       userOwner: userOwner,
     );

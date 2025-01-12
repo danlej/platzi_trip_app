@@ -26,7 +26,6 @@ class HeaderAppBar extends StatelessWidget {
               );
             case ConnectionState.active:
             case ConnectionState.done:
-            default:
               return showPlacesData(snapshot);
           }
         });
@@ -45,7 +44,7 @@ class HeaderAppBar extends StatelessWidget {
       return Stack(
         children: <Widget>[
           GradientBack(height: 250.0),
-          const Text("Usuario no logueado. Has login")
+          const Text("Usuario no logueado. Has login"),
         ],
       );
     } else {

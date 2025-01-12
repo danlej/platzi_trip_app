@@ -30,8 +30,7 @@ class ProfilePlacesList extends StatelessWidget {
     userBloc = BlocProvider.of<UserBloc>(context);
 
     return Container(
-      margin: const EdgeInsets.only(
-          top: 10.0, left: 20.0, right: 20.0, bottom: 10.0),
+      margin: const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0, bottom: 10.0),
       child: StreamBuilder(
           stream: userBloc.myPlacesListStream(user.uid),
           builder: (context, AsyncSnapshot snapshot) {
@@ -41,9 +40,7 @@ class ProfilePlacesList extends StatelessWidget {
                 return const CircularProgressIndicator();
               case ConnectionState.active:
               case ConnectionState.done:
-              default:
-                return Column(
-                    children: userBloc.buildMyPlaces(snapshot.data.docs));
+                return Column(children: userBloc.buildMyPlaces(snapshot.data.docs));
             }
           }),
     );

@@ -65,16 +65,11 @@ class _CardImageListState extends State<CardImageList> {
                 case ConnectionState.active:
                   // ignore: avoid_print
                   print("PLACESLIST: ACTIVE");
-                  return listViewPlaces(
-                      userBloc.buildPlaces(snapshot.data.docs, widget.user));
+                  return listViewPlaces(userBloc.buildPlaces(snapshot.data.docs, widget.user));
                 case ConnectionState.done:
                   // ignore: avoid_print
                   print("PLACESLIST: DONE");
-                  return listViewPlaces(
-                      userBloc.buildPlaces(snapshot.data.docs, widget.user));
-                default:
-                  return listViewPlaces(
-                      userBloc.buildPlaces(snapshot.data.docs, widget.user));
+                  return listViewPlaces(userBloc.buildPlaces(snapshot.data.docs, widget.user));
               }
             }));
   }
